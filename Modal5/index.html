@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Comparison</title>
+    <style>
+        /* Basic styling */
+        .product { margin: 20px; padding: 10px; border: 1px solid #ccc; }
+        .product img { width: 100px; height: 100px; }
+        .product .name { font-weight: bold; }
+
+        /* Modal styling */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 20px; width: 80%; max-width: 500px; }
+        .comparison-area { display: flex; flex-wrap: wrap; }
+        .compared-product { margin: 10px; text-align: center; }
+        .compared-product img { width: 80px; height: 80px; }
+    </style>
+</head>
+<body>
+
+    <!-- Products -->
+    <div id="products"></div>
+
+    <!-- Modal -->
+    <div class="modal" id="compareModal">
+        <div class="modal-content">
+            <div id="comparisonArea" class="comparison-area"></div>
+            <button onclick="closeModal()">Close</button>
+            <button onclick="goToNextPage()">Compare Selected</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample JSON data
+        const productsJson = [
+            { "id": 1, "name": "Product 1", "desc": "Description for product 1", "image": "https://via.placeholder.com/100" },
+            { "id": 2, "name": "Product 2", "desc": "Description for product 2", "image": "https://via.placeholder.com/100" },
+            { "id": 3, "name": "Product 3", "desc": "Description for product 3", "image": "https://via.placeholder.com/100" },
+            { "id": 4, "name": "Product 4", "desc": "Description for product 4", "image": "https://via.placeholder.com/100" },
+            { "id": 5, "name": "Product 5", "desc": "Description for product 5", "image": "https://via.placeholder.com/100" }
+        ];
+
+        // Render products on the page
+        const productsContainer = document.getElementById('products');
+        function renderProducts() {
+            productsJson.slice(0, 10).forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="name">${product.name}</div>
+                    <div class="desc">${product.desc}</div>
+                    <button onclick="compareProduct(${product.id})">Compare</button>
+                `;
+                productsContainer.appendChild(productDiv);
+            });
+        }
+
+        let currentProductId;
+        function compareProduct(productId) {
+            currentProductId = productId;
+            openModal();
+            renderComparison();
+        }
+
+        function openModal() {
+            document.getElementById('compareModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('compareModal').style.display = 'none';
+        }
+
+        function renderComparison() {
+            const comparisonArea = document.getElementById('comparisonArea');
+            comparisonArea.innerHTML = "";  // Clear previous comparison
+
+            const comparisonProducts = productsJson.filter(p => p.id !== currentProductId).slice(0, 3);
+
+            comparisonProducts.forEach(product => {
+                const comparedDiv = document.createElement('div');
+                comparedDiv.classList.add('compared-product');
+                comparedDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div>${product.name}</div>
+                    <div>${product.desc}</div>
+                `;
+                comparisonArea.appendChild(comparedDiv);
+            });
+        }
+
+        function goToNextPage() {
+            window.location.href = `product.html?id=${currentProductId}`;
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
