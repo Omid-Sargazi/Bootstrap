@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        /* Basic styling */
+        .product-detail { margin: 20px; padding: 10px; border: 1px solid #ccc; }
+        .product-detail img { width: 100px; height: 100px; }
+
+        /* Modal styling */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 20px; width: 80%; max-width: 500px; }
+        .product-list { display: flex; flex-wrap: wrap; }
+        .product-list img { width: 80px; height: 80px; }
+        .product-list-item { margin: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="productDetail" class="product-detail"></div>
+    <button id="selectProductBtn">Select Product</button>
+
+    <!-- Modal -->
+    <div class="modal" id="selectProductModal">
+        <div class="modal-content">
+            <div id="modalProductList" class="product-list"></div>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Sample products JSON (replace with actual JSON fetch)
+        const productsJson = [
+            { "id": 1, "name": "Product 1", "desc": "Description for product 1", "image": "https://via.placeholder.com/100" },
+            { "id": 2, "name": "Product 2", "desc": "Description for product 2", "image": "https://via.placeholder.com/100" },
+            { "id": 3, "name": "Product 3", "desc": "Description for product 3", "image": "https://via.placeholder.com/100" },
+            { "id": 4, "name": "Product 4", "desc": "Description for product 4", "image": "https://via.placeholder.com/100" }
+        ];
+
+        const productDetailDiv = document.getElementById('productDetail');
+        const selectProductBtn = document.getElementById('selectProductBtn');
+        const modal = document.getElementById('selectProductModal');
+        const modalProductList = document.getElementById('modalProductList');
+
+        function displayProduct() {
+            const selectedProduct = productsJson.find(p => p.id == productId);
+            if (selectedProduct) {
+                productDetailDiv.innerHTML = `
+                    <img src="${selectedProduct.image}" alt="${selectedProduct.name}">
+                    <div class="name">${selectedProduct.name}</div>
+                    <div class="desc">${selectedProduct.desc}</div>
+                `;
+            }
+        }
+
+        selectProductBtn.addEventListener('click', () => {
+            openModal();
+        });
+
+        function openModal() {
+            modal.style.display = 'flex';
+            renderModalProducts();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function renderModalProducts() {
+            modalProductList.innerHTML = ""; // Clear previous content
+            const modalProducts = productsJson.filter(p => p.id !== parseInt(productId)).slice(0, 4);
+
+            modalProducts.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-list-item');
+                productItem.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div>${product.name}</div>
+                    <div>${product.desc}</div>
+                `;
+                modalProductList.appendChild(productItem);
+            });
+
+            if (modalProducts.length === 0) {
+                modalProductList.innerHTML = "<p>No products available for selection.</p>";
+            }
+        }
+
+        displayProduct();
+    </script>
+</body>
+</html>
