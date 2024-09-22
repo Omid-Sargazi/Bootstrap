@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Product -->
+    <div class="product">
+        <img src="Image/1.png" alt="">
+        div class="title">Main Product</div>
+        <div class="price">$50</div>
+        <button>Add to Cart</button>
+    </div>
+
+
+    <button id="choiceItemBtn">Choice Item</button>
+    
+
+    <!-- Modal -->
+    <div class="modal" id="choiceItemModal">
+        <div class="modal-content">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search for items...">
+            <div id="itemList" class="item-list"></div>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
