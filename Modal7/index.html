@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Comparison Page</title>
+    <style>
+        /* Styling for the main product and compared product */
+        .product-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .product {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .product img {
+            width: 100px;
+            height: 100px;
+        }
+        .product .title {
+            font-weight: bold;
+        }
+
+        /* Button styling */
+        #choiceItemBtn {
+            margin: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+        }
+        .modal .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .modal .item-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .modal .item {
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .modal .item img {
+            width: 80px;
+            height: 80px;
+        }
+        .modal .item .title {
+            font-weight: bold;
+        }
+        .modal .item .price {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Product and Compared Product Section -->
+    <div class="product-container">
+        <!-- Main Product -->
+        <div class="product" id="mainProduct">
+            <img src="https://via.placeholder.com/100" alt="Main Product Image">
+            <div class="title">Main Product</div>
+            <div class="price">$50</div>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Compared Product (Will be filled with selected item) -->
+        <div class="product" id="comparedProduct" style="display: none;">
+            <!-- Compared product details will go here -->
+        </div>
+    </div>
+
+    <!-- Left-Side Button for Choice Item -->
+    <button id="choiceItemBtn">Choice Item</button>
+
+    <!-- Modal -->
+    <div class="modal" id="choiceItemModal">
+        <div class="modal-content">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search for items...">
+            <div id="itemList" class="item-list"></div>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample JSON Data with 3 products
+        let productsJson = [
+            { "id": 1, "title": "Item 1", "price": "$30", "image": "https://via.placeholder.com/100" },
+            { "id": 2, "title": "Item 2", "price": "$40", "image": "https://via.placeholder.com/100" },
+            { "id": 3, "title": "Item 3", "price": "$25", "image": "https://via.placeholder.com/100" }
+        ];
+
+        const choiceItemBtn = document.getElementById('choiceItemBtn');
+        const choiceItemModal = document.getElementById('choiceItemModal');
+        const itemList = document.getElementById('itemList');
+        const searchBox = document.getElementById('searchBox');
+
+        // Function to open the modal
+        choiceItemBtn.addEventListener('click', function() {
+            openModal();
+            renderItems();  // Display items when the modal opens
+        });
+
+        // Function to open the modal
+        function openModal() {
+            choiceItemModal.style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            choiceItemModal.style.display = 'none';
+        }
+
+        // Function to render items inside the modal
+        function renderItems(searchTerm = "") {
+            itemList.innerHTML = "";  // Clear previous items
+
+            // Filter products based on search term
+            const filteredProducts = productsJson.filter(product => 
+                product.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            // Loop through filtered products and add them to the modal
+            filteredProducts.forEach(product => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
+                itemDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}">
+                    <div class="title">${product.title}</div>
+                    <div class="price">${product.price}</div>
+                `;
+                itemDiv.addEventListener('click', () => selectItem(product));  // Add click event to select item
+                itemList.appendChild(itemDiv);
+            });
+
+            // If no products, show a message
+            if (filteredProducts.length === 0) {
+                itemList.innerHTML = "<p>No items available for selection.</p>";
+            }
+        }
+
+        // Add search functionality
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value;
+            renderItems(searchTerm);
+        });
+
+        // Function to handle item selection from the modal
+        function selectItem(product) {
+            localStorage.setItem('selectedProduct', JSON.stringify(product));  // Save selected item to localStorage
+            window.location.reload();  // Reload the page to reflect the selected item
+        }
+
+        // Function to display the selected product for comparison
+        function displayComparedProduct() {
+            const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));  // Get selected item from localStorage
+
+            if (selectedProduct) {
+                const comparedProductDiv = document.getElementById('comparedProduct');
+                comparedProductDiv.style.display = 'block';  // Show the compared product div
+                comparedProductDiv.innerHTML = `
+                    <img src="${selectedProduct.image}" alt="${selectedProduct.title}">
+                    <div class="title">${selectedProduct.title}</div>
+                    <div class="price">${selectedProduct.price}</div>
+                `;
+            }
+        }
+
+        // Call the function to display the compared product on page load
+        displayComparedProduct();
+    </script>
+
+</body>
+</html>
