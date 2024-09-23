@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="product-container">
+        <!-- Main Product -->
+        <div class="product" id="mainProduct">
+            <img src="https://via.placeholder.com/100" alt="Main Product Image">
+            <div class="title">Main Product</div>
+            <div class="price">$50</div>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Compared Product (Will be filled with selected item) -->
+        <div class="product" id="comparedProduct" style="display: none;">
+            <!-- Compared product details will go here -->
+        </div>
+    </div>
+    <button id="choiceItemBtn">Choice Item</button>
+
+    <div class="modal" id="choiceItemModal">
+        <div class="modal-content">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search for items...">
+            <div id="itemList" class="item-list"></div>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
