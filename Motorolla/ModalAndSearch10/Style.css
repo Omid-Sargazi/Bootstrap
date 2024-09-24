@@ -1,0 +1,11 @@
+.product img {
+    width: 100px;
+    height: 100px;
+}
+.modal-item img {
+    width: 80px;
+    height: 80px;
+}
+#comparedProduct {
+    display: none;
+}
