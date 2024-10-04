@@ -1,0 +1,100 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Fixed Header */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: 1000;
+}
+
+.fixed-header .menu-button, .fixed-header .search-button {
+    cursor: pointer;
+}
+
+/* Main Content */
+main {
+    margin-top: 60px; /* Make space for the fixed header */
+    margin-bottom: 60px; /* Make space for the fixed footer */
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Categories Page */
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.categories-list .category {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.categories-list .category img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.categories-list .category h3 {
+    margin: 0;
+}
+
+/* Footer */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.fixed-footer button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.fixed-footer button:hover {
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .categories-list {
+        flex-direction: column;
+    }
+}
