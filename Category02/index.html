@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Responsive Layout</title>
+</head>
+<body>
+  <header>
+    <button id="menu-btn">☰</button>
+    <div id="logo">🌟</div>
+    <button id="search-btn">🔍</button>
+  </header>
+
+  <main>
+    <section id="products">
+      <!-- Product list -->
+      <h2>Products</h2>
+      <p>Product details go here...</p>
+    </section>
+  </main>
+
+  <footer>
+    <button id="home-btn">Home</button>
+    <button id="categories-btn">Categories</button>
+    <button id="cart-btn">Cart</button>
+    <button id="account-btn">Account</button>
+  </footer>
+
+  <!-- Category Overlay -->
+  <div id="category-overlay" class="hidden">
+    <button id="close-overlay">X</button>
+    <ul id="category-list">
+      <!-- Categories populated by JS -->
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
