@@ -1,0 +1,165 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Fixed Header */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    z-index: 1000;
+}
+
+/* Main Content */
+main {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Categories and Products Layout */
+.categories-container {
+    display: flex;
+    height: 100vh;
+}
+
+.categories-menu {
+    width: 200px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    overflow-y: auto;
+    position: fixed;
+    top: 60px;
+    bottom: 60px;
+}
+
+.categories-menu h3 {
+    margin-bottom: 10px;
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.categories-list .category {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.categories-list .category:hover {
+    background-color: #bbb;
+}
+
+.category-products {
+    margin-left: 220px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: scale(1.02);
+}
+
+.product-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.product-item h4 {
+    margin: 0;
+}
+
+.sub-items {
+    margin-left: 70px;
+    margin-top: 10px;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.sub-items.active {
+    display: block;
+}
+
+/* Footer */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.fixed-footer button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.fixed-footer button:hover {
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .categories-container {
+        flex-direction: column;
+    }
+
+    .categories-menu {
+        width: 100%;
+        position: relative;
+    }
+
+    .category-products {
+        margin-left: 0;
+    }
+}
