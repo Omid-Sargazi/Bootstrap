@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Product Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed-header">
+        <div class="menu-button">☰</div>
+        <div class="icon">LOGO</div>
+        <div class="search-button">🔍</div>
+    </header>
+
+    <!-- Main content -->
+    <main id="content">
+        <!-- Home Page (initial content) -->
+        <section id="home-page" class="page active">
+            <h1>Welcome to Our Store</h1>
+            <div class="products">
+                <p>All products listed here...</p>
+            </div>
+        </section>
+
+        <!-- Categories Page -->
+        <section id="categories-page" class="page hidden">
+            <div class="categories-container">
+                <aside class="categories-menu">
+                    <h3>Categories</h3>
+                    <div class="categories-list">
+                        <!-- Categories will be loaded here dynamically -->
+                    </div>
+                </aside>
+                <div class="category-products">
+                    <h2 id="category-title"></h2>
+                    <div class="products-list">
+                        <!-- Products of selected category will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fixed-footer">
+        <nav>
+            <button id="home-button">Home</button>
+            <button id="categories-button">Categories</button>
+            <button id="cart-button">Cart</button>
+            <button id="account-button">Account</button>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
